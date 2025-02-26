@@ -3,11 +3,11 @@
 class Node 
   include Comparable
 
-  attr_accessor :left_child, :right_child
+  attr_accessor :left, :right, :data
 
   def initialize(data)
     @data = data
-    @left_child = nil
-    @right_child = nil
+    @left = nil
+    @right = nil
   end
 end
