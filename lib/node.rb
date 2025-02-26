@@ -16,4 +16,16 @@ class Node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def traverse_nodes(data)
+    return self if @data == data
+    if data < @data
+      return nil if @left.nil?
+      return @left.traverse_nodes(data)
+    end
+    if data > @data 
+      return nil if @right.nil? 
+      return @right.traverse_nodes(data)
+    end
+  end
 end
