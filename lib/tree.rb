@@ -23,4 +23,8 @@ class Tree
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def traverse_tree(data)
+    @root.traverse_nodes(data)
+  end
 end
