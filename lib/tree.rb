@@ -24,7 +24,11 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
+  # Move through Nodes of a tree to reach data, if data doesn't 
+  #   exist in tree yield to block with access to child attribute
+  #   where data would be.
   def traverse_tree(data)
-    @root.traverse_nodes(data)
+    # child_attribute is either @left or @right of the last node reached before nil
+    @root.traverse_nodes(data) { |child_attr| yield(child_attr) }
   end
 end
