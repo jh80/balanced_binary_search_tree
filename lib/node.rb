@@ -18,17 +18,15 @@ class Node
   end
 
   def traverse_nodes(data)
-    return self if @data == data
-    move = nil
-    if data < @data
-      move = -1
-      return yield(self, move) if @left.nil?
-      return @left.traverse_nodes(data) {|node, move| yield(node, move)}
-    end
-    if data > @data 
-      move = 1
-      return yield(self, move) if @right.nil? 
-      return @right.traverse_nodes(data) {|node, move| yield(node, move)}
-    end
+    move = data <=> @data
+    return self if move == 0
+
+    next_node(move, data) {|node, move| yield(node, move)}
   end
+
+  def next_node(move, data)
+    child_attr = move < 0 ? @left : @right
+    return yield(self, move) if child_attr.nil?
+    return child_attr.traverse_nodes(data) {|node, move| yield(node, move)}
+  end 
 end
