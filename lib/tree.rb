@@ -8,6 +8,10 @@ class Tree
     @root = build_tree(@array, 0, @array.length - 1)
   end
 
+  def insert(data)
+    traverse_tree(data) {|child_attr| child_attr = Node.new(data)}
+  end
+
   def build_tree(array, start, stop)
     return nil if start > stop
       
