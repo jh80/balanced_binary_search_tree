@@ -9,7 +9,15 @@ class Tree
   end
 
   def insert(data)
-    traverse_tree(data) {|child_attr| child_attr = Node.new(data)}
+    traverse_tree(data) do |node, move| 
+      if move < 0
+        node.left = Node.new(data)
+      elsif move > 0
+        node.right = Node.new(data)
+      else move == 0
+        puts "move equals zero should not happen in insert and did"
+      end
+    end
   end
 
   def build_tree(array, start, stop)
@@ -33,6 +41,6 @@ class Tree
   #   where data would be.
   def traverse_tree(data)
     # child_attribute is either @left or @right of the last node reached before nil
-    @root.traverse_nodes(data) { |child_attr| yield(child_attr) }
+    @root.traverse_nodes(data) { |node, move| yield(node, move) }
   end
 end
