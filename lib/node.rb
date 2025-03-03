@@ -29,4 +29,12 @@ class Node
     return yield(self, move) if child_attr.nil?
     return child_attr.traverse_nodes(data) {|node, move| yield(node, move)}
   end 
+
+  def traverse_parent_nodes(data)
+    child = ((data <=> self.data) < 0) ? self.left : self.right
+    return nil if child == nil
+    return self if child.data == data
+    return child.traverse_parent_nodes(data)
+  end    
+
 end
