@@ -37,4 +37,8 @@ class Node
     return child.traverse_parent_nodes(data)
   end    
 
+  def leaf?
+    return true if self.left.nil? && self.right.nil?
+    false
+  end
 end
