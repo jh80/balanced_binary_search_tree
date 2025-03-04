@@ -41,4 +41,10 @@ class Node
     return true if self.left.nil? && self.right.nil?
     false
   end
+
+  def count_children
+    return 0 if self.leaf?
+    return 2 if self.left && self.right
+    return 1 
+  end
 end
