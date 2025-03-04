@@ -20,6 +20,17 @@ class Tree
     end
   end
 
+  def delete(data)
+    # TODO CHECK FOR ROOT MATCH
+    parent = find_parent(data)
+    move = data <=> parent.data
+    node = move < 0 ? parent.left : parent.right
+    num_children = node.count_children
+    if num_children.zero?
+      move < 0 ? parent.left : parent.right = nil
+    end
+  end
+
   def build_tree(array, start, stop)
     return nil if start > stop
       
