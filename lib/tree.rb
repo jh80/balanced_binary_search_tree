@@ -29,9 +29,8 @@ class Tree
     if num_children.zero?
       move < 0 ? parent.left : parent.right = nil
     elsif num_children == 1
-      # Replace node as a child of its' parent with node's child that exitst
       child = node.left ? node.left : node.right
-      parent.assign_child(move, child)
+      parent.assign_child(child)
     end
   end
 
