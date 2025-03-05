@@ -52,7 +52,7 @@ class Node
     move = new_child.data <=> self.data
     if move < 0
       self.left = new_child
-    else move > 0
+    elsif move > 0
       self.right = new_child
     end
   end
