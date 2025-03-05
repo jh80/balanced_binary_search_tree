@@ -47,4 +47,12 @@ class Node
     return 2 if self.left && self.right
     return 1 
   end
+
+  def assign_child(move, new_child)
+    if move < 0
+      self.left = new_child
+    else move > 0
+      self.right = new_child
+    end
+  end
 end
