@@ -32,6 +32,11 @@ class Tree
       # Replace node as a child of its' parent with node's child that exitst
       child = node.left ? node.left : node.right
       parent.assign_child(child)
+    else
+      replacement = node.next_biggest
+      new_data = replacement.data
+      delete(new_data)
+      node.data = new_data
     end
   end
 
