@@ -48,8 +48,7 @@ class Node
     return 1 
   end
 
-  def assign_child(new_child)
-    move = new_child.data <=> self.data
+  def assign_child(move, new_child)
     if move < 0
       self.left = new_child
     elsif move > 0
