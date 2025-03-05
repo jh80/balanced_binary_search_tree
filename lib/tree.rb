@@ -40,6 +40,10 @@ class Tree
     end
   end
 
+  def find(data)
+    @root.traverse_nodes(data)
+  end
+
   def build_tree(array, start, stop)
     return nil if start > stop
       
