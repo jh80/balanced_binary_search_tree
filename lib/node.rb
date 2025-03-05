@@ -56,4 +56,17 @@ class Node
       self.right = new_child
     end
   end
+
+  def next_biggest
+    # find smallest in path from bigger child
+    self.right.smallest_in_path
+  end
+
+  def smallest_in_path
+    if self.left
+      return self.left.smallest_in_path
+    else
+      return self
+    end
+  end
 end
