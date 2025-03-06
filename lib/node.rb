@@ -78,11 +78,9 @@ class Node
   def queue(array)
     return if array.empty?
     curr = array[0]
-    array << curr.left unless curr.left.nil?
-    array << curr.right unless curr.right.nil?
+    curr.add_children_to(array)
     yield(curr)
     array.shift
-    return if array.empty?
-    array[0].queue(array) {|curr| yield(curr)}
+    array[0].queue(array) {|curr| yield(curr)} unless array.empty?
   end
 end
