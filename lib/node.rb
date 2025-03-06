@@ -57,6 +57,11 @@ class Node
     end
   end
 
+  def add_children_to(array)
+    array << self.left unless self.left.nil?
+    array << self.right unless self.right.nil?
+  end
+
   def next_biggest
     # find smallest in path from bigger child
     self.right.smallest_in_path
