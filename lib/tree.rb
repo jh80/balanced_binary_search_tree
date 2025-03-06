@@ -41,7 +41,13 @@ class Tree
   end
 
   def level_order
-    @root.queue([@root]) {|curr| yield(curr)}
+    if block_given?
+      @root.queue([@root]) {|curr| yield(curr)}
+    else
+      full_list = []
+      @root.queue([@root]) {|curr| full_list << curr}
+      full_list
+    end
   end
 
   def find(data)
