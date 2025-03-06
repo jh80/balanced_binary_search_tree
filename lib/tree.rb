@@ -40,6 +40,10 @@ class Tree
     end
   end
 
+  def level_order
+    @root.queue([@root]) {|curr| yield(curr)}
+  end
+
   def find(data)
     @root.traverse_nodes(data)
   end

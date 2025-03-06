@@ -69,4 +69,15 @@ class Node
       return self
     end
   end
+
+  def queue(array)
+    return if array.empty?
+    curr = array[0]
+    array << curr.left unless curr.left.nil?
+    array << curr.right unless curr.right.nil?
+    yield(curr)
+    array.shift
+    return if array.empty?
+    array[0].queue(array) {|curr| yield(curr)}
+  end
 end
