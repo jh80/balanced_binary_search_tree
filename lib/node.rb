@@ -83,4 +83,27 @@ class Node
     array.shift
     array[0].queue(array) {|curr| yield(curr)} unless array.empty?
   end
+
+  def order_fam
+    fam = fam_to_array
+    if fam.length == 1
+      return fam
+    else
+      return fam.reduce([]) do |ordered_fams, node|
+        if node == self
+          ordered_fams +[node]
+        else
+          ordered_fams + node.order_fam
+        end
+      end
+    end
+  end
+
+  def fam_to_array
+    fam = []
+    fam << self.left unless self.left.nil?
+    fam << self
+    fam << self.right unless self.right.nil?
+    fam
+  end
 end
