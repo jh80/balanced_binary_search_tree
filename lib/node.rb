@@ -106,4 +106,12 @@ class Node
     fam << self.right unless self.right.nil?
     fam
   end
+
+  def fam_to_array_preorder
+    fam = []
+    fam << self
+    fam << self.left unless self.left.nil?
+    fam << self.right unless self.right.nil?
+    fam
+  end
 end
