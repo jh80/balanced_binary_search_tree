@@ -52,7 +52,11 @@ class Tree
 
   def inorder
     ordered_tree = @root.order_fam 
-    ordered_tree.each { |node| yield(node) }
+    if block_given?
+      ordered_tree.each { |node| yield(node) }
+    else
+      ordered_tree
+    end
   end
 
   def find(data)
