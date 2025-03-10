@@ -50,6 +50,10 @@ class Tree
     end
   end
 
+  def inorder
+    @root.order_fam {|node| print "*" + node.data.to_s + " "}
+  end
+
   def find(data)
     @root.traverse_nodes(data)
   end
