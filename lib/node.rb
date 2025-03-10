@@ -99,7 +99,7 @@ class Node
     end
   end
 
-  def fam_to_array
+  def fam_to_array_inorder
     fam = []
     fam << self.left unless self.left.nil?
     fam << self

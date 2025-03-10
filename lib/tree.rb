@@ -51,7 +51,7 @@ class Tree
   end
 
   def inorder
-    ordered_tree = @root.order_fam { |node| node.fam_to_array }
+    ordered_tree = @root.order_fam { |node| node.fam_to_array_inorder }
     if block_given?
       ordered_tree.each { |node| yield(node) }
     else
