@@ -50,14 +50,14 @@ class Tree
     end
   end
 
-  # def inorder
-  #   ordered_tree = @root.order_fam 
-  #   if block_given?
-  #     ordered_tree.each { |node| yield(node) }
-  #   else
-  #     ordered_tree.map {|node| node.data}
-  #   end
-  # end
+  def inorder
+    ordered_tree = @root.order_fam { |node| node.fam_to_array }
+    if block_given?
+      ordered_tree.each { |node| yield(node) }
+    else
+      ordered_tree.map {|node| node.data}
+    end
+  end
 
   def preorder
     ordered_tree = @root.order_fam { |node| node.fam_to_array_preorder }
