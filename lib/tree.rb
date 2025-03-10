@@ -45,7 +45,7 @@ class Tree
       @root.queue([@root]) {|curr| yield(curr)}
     else
       full_list = []
-      @root.queue([@root]) {|curr| full_list << curr}
+      @root.queue([@root]) {|curr| full_list << curr.data}
       full_list
     end
   end
@@ -55,7 +55,7 @@ class Tree
     if block_given?
       ordered_tree.each { |node| yield(node) }
     else
-      ordered_tree
+      ordered_tree.map {|node| node.data}
     end
   end
 
