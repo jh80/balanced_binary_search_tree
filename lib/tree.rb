@@ -51,7 +51,8 @@ class Tree
   end
 
   def inorder
-    @root.order_fam {|node| print "*" + node.data.to_s + " "}
+    ordered_tree = @root.order_fam 
+    ordered_tree.each { |node| yield(node) }
   end
 
   def find(data)

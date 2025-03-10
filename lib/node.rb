@@ -87,15 +87,13 @@ class Node
   def order_fam
     fam = fam_to_array
     if fam.length == 1
-      yield(fam[0])
       return fam
     else
       return fam.reduce([]) do |ordered_fams, node|
         if node == self
-          yield(node)
           ordered_fams + [node]
         else
-          ordered_fams + node.order_fam {|node| yield(node)}
+          ordered_fams + node.order_fam
         end
       end
     end
