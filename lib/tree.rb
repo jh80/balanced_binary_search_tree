@@ -68,6 +68,15 @@ class Tree
     end
   end
 
+  def postorder 
+    ordered_tree = @root.order_fam { |node| node.fam_to_array_postorder}
+    if block_given?
+      ordered_tree.each { |node| yield(node)}
+    else
+      ordered_tree.map { |node| node.data}
+    end
+  end
+
   def find(data)
     @root.traverse_nodes(data)
   end
