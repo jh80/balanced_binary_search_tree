@@ -124,11 +124,11 @@ class Node
   end
 
   # Moving through tree helper functions
-  def get_move(decendant_node)
-    if decendant_node.class == Node
-      decendant_node.data <=> self.data
+  def get_move(decendant)
+    if decendant.class == Node
+      decendant.data <=> self.data
     else
-      decendant_node <=> self.data
+      decendant <=> self.data
     end
   end
 end
