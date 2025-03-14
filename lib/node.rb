@@ -142,7 +142,7 @@ class Node
 
   def step_toward(decendant)
     move = get_move(decendant)
-    return self if move.zero?
+    return 0 if move.zero?
     get_child(move)
   end
 end
