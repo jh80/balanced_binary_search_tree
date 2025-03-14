@@ -131,4 +131,12 @@ class Node
       decendant <=> self.data
     end
   end
+
+  def get_child(move)
+    if move == 0
+      puts "GET CHILD WAS USED ON A ZERO MOVE"
+    else
+      move < 0 ? self.left : self.right
+    end
+  end
 end
