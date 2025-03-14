@@ -139,4 +139,9 @@ class Node
       move < 0 ? self.left : self.right
     end
   end
+
+  def get_child_toward(decendant)
+    move = get_move(decendant)
+    get_child(move)
+  end
 end
