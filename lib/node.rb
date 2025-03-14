@@ -122,4 +122,13 @@ class Node
     fam << self
     fam
   end
+
+  # Moving through tree helper functions
+  def get_move(decendant_node)
+    if decendant_node.class == Node
+      decendant_node.data <=> self.data
+    else
+      decendant_node <=> self.data
+    end
+  end
 end
