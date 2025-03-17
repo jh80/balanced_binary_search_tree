@@ -95,6 +95,10 @@ class Tree
     end
   end
 
+  def depth(node)
+    @root.count_edges_to(node)
+  end
+
   def build_tree(array, start, stop)
     return nil if start > stop
       
