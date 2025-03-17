@@ -123,6 +123,18 @@ class Node
     fam
   end
 
+  def count_edges_to(node)
+    child = step_toward(node)
+    return nil if node.nil?
+    return nil if child.nil?
+    # child will == 0 when step_toward argument is the same node that called step_toward
+    return 0 if child == 0
+    count = child.count_edges_to(node)
+    return  count + 1 if child && count
+    # Return nil if child doesn't exist
+    nil
+  end
+
   # Moving through tree helper functions
   def get_move(decendant)
     if decendant.class == Node
