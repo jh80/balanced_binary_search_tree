@@ -109,6 +109,16 @@ class Tree
     root
   end
 
+  def balanced?
+    balanced = true
+    level_order do |node|
+      left_height = node.left ? height(node.left) + 1 : 0
+      right_height = node.right ? height(node.right) + 1 : 0
+      balanced = false unless [-1, 0, 1].include?(left_height - right_height)
+    end
+    balanced
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
