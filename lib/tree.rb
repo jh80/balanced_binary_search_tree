@@ -46,24 +46,17 @@ class Tree
 
   def level_order
     queue = [@root]
+    full = []
     while !queue.empty?
       curr = queue.shift
       curr.add_children_to(queue)
-      yield(curr)
+      if block_given?
+        yield(curr)
+      else
+        full << curr.data
+      end
     end
-
-    # queue = [@root]
-    # spare_array = block_given? ? [] : [@root]
-    # while !queue.empty?
-    #   node = queue.shift
-    #   node.add_children_to(queue)
-    #   if block_given?
-    #     yield(node, array = spare_array)
-    #   else
-    #     node.add_children_to(spare_array)
-    #   end
-    # end
-    # return spare_array unless block_given?
+    return full unless block_given?
   end
   
   def build_tree(array, start, stop)
