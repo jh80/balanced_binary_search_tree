@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 require "./lib/nodeable.rb"
+require "./lib/orderable.rb"
 # Stores data and used with other nodes to build a binary search tree
 class Node 
   include Comparable
   include Nodeable
+  include Orderable
   attr_accessor :left, :right, :data
 
   def initialize(data)
@@ -77,45 +79,6 @@ class Node
     yield(curr)
     array.shift
     array[0].queue(array) {|curr| yield(curr)} unless array.empty?
-  end
-
-  def order_fam
-    fam = yield(self)
-    if fam.length == 1
-      return fam
-    else
-      return fam.reduce([]) do |ordered_fams, node|
-        if node == self
-          ordered_fams + [node]
-        else
-          ordered_fams + node.order_fam { |node| yield(node) }
-        end
-      end
-    end
-  end
-
-  def fam_to_array_inorder
-    fam = []
-    fam << self.left unless self.left.nil?
-    fam << self
-    fam << self.right unless self.right.nil?
-    fam
-  end
-
-  def fam_to_array_preorder
-    fam = []
-    fam << self
-    fam << self.left unless self.left.nil?
-    fam << self.right unless self.right.nil?
-    fam
-  end
-
-  def fam_to_array_postorder
-    fam = []
-    fam << self.left unless self.left.nil?
-    fam << self.right unless self.right.nil?
-    fam << self
-    fam
   end
 
   def count_edges_to(node)
