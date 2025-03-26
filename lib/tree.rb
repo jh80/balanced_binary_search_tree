@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require "./lib/node.rb"
+require './lib/node'
 
+# Holds root node of tree and abilities to manipulate and traverse tree
 class Tree 
   def initialize(unfiltered_array)
     @array = unfiltered_array.uniq.sort
@@ -9,20 +10,21 @@ class Tree
   end
 
   def insert(data)
-    traverse_tree(data) do |node, move| 
-      if move < 0
+    traverse_tree(data) do |node, move|
+      if move.negative?
         node.left = Node.new(data)
-      elsif move > 0
+      elsif move.positive?
         node.right = Node.new(data)
-      else move == 0
-        puts "move equals zero should not happen in insert and did"
+      elsif move.zero?
+        puts 'move equals zero should not happen in insert and did'
       end
     end
   end
 
   def delete(data)
     # TODO CHECK FOR ROOT MATCH
-    return nil unless parent = find_parent(data)
+    return nil unless parent == find_parent(data)
+
     move = data <=> parent.data
     node = move < 0 ? parent.left : parent.right
     num_children = node.count_children
@@ -145,7 +147,7 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  # Move through Nodes of a tree to reach data, if data doesn't 
+  # Move through Nodes of a tree to reach data, if data doesn't
   #   exist in tree yield to block with access to child attribute
   #   where data would be.
   def traverse_tree(data)
