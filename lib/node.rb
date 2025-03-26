@@ -1,8 +1,9 @@
 # frozen_string_literal: true
-require "./lib/nodeable.rb"
-require "./lib/orderable.rb"
+
+require './lib/nodeable'
+require './lib/orderable'
 # Stores data and used with other nodes to build a binary search tree
-class Node 
+class Node
   include Comparable
   include Nodeable
   include Orderable
@@ -22,58 +23,62 @@ class Node
 
   def traverse_nodes(data)
     move = data <=> @data
-    return self if move == 0
+    return self if move.zero?
 
     next_node(move, data) {|node, move| yield(node, move)}
   end
 
   def traverse_parent_nodes(data)
-    child = ((data <=> self.data) < 0) ? self.left : self.right
-    return nil if child == nil
+    child = (data <=> self.data).negative? ? left : right
+    return nil if child.nil?
     return self if child.data == data
-    return child.traverse_parent_nodes(data)
+
+    child.traverse_parent_nodes(data)
   end
 
   def leaf?
-    return true if self.left.nil? && self.right.nil?
+    return true if left.nil? && right.nil?
+
     false
   end
 
   def count_children
-    return 0 if self.leaf?
-    return 2 if self.left && self.right
-    return 1 
+    return 0 if leaf?
+    return 2 if left && right
+
+    1
   end
 
   def assign_child(new_child, move = nil)
-    move = new_child.data <=> self.data unless move
-    if move < 0
+    move ||= new_child.data <=> data
+    if move.negative?
       self.left = new_child
-    elsif move > 0
+    elsif move.positive?
       self.right = new_child
     end
   end
 
   def add_children_to(array)
-    array << self.left unless self.left.nil?
-    array << self.right unless self.right.nil?
+    array << left unless left.nil?
+    array << right unless right.nil?
   end
 
   def next_biggest
     # find smallest in path from bigger child
-    self.right.smallest_in_path
+    right.smallest_in_path
   end
 
   def smallest_in_path
-    if self.left
-      return self.left.smallest_in_path
+    if left
+      left.smallest_in_path
     else
-      return self
+      self
     end
   end
 
   def queue(array)
     return if array.empty?
+
     curr = array[0]
     curr.add_children_to(array)
     yield(curr)
@@ -86,9 +91,11 @@ class Node
     return nil if node.nil?
     return nil if child.nil?
     # child will == 0 when step_toward argument is the same node that called step_toward
-    return 0 if child == 0
+    return 0 if child.zero?
+
     count = child.count_edges_to(node)
     return  count + 1 if child && count
+
     # Return nil if child doesn't exist
     nil
   end
