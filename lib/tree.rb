@@ -23,7 +23,7 @@ class Tree
 
   def delete(data)
     # TODO CHECK FOR ROOT MATCH
-    return nil unless parent == find_parent(data)
+    return nil unless parent = find_parent(data)
 
     move = data <=> parent.data
     node = move < 0 ? parent.left : parent.right
