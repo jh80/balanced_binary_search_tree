@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Stores data and used with other nodes to build a binary search tree
 class Node 
   include Comparable
 
