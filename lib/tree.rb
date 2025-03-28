@@ -35,10 +35,7 @@ class Tree
       child = node.left ? node.left : node.right
       parent.assign_child(child)
     else
-      replacement = node.next_biggest
-      new_data = replacement.data
-      delete(new_data)
-      node.data = new_data
+      replace(node)
     end
   end
 
