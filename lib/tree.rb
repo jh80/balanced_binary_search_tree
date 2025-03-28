@@ -22,7 +22,7 @@ class Tree
   end
 
   def delete(data)
-    # TODO CHECK FOR ROOT MATCH
+    return delete_root if data == @root.data
     return nil unless parent = find_parent(data)
 
     move = data <=> parent.data
@@ -164,5 +164,16 @@ class Tree
     new_data = replacement.data
     delete(new_data)
     node.data = new_data
+  end
+
+  def delete_root
+    case @root.count_children
+    when 0
+      @root = nil
+    when 1
+      @root = @root.left || @root.right
+    when 2
+      replace(@root)
+    end
   end
 end
