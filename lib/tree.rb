@@ -26,14 +26,12 @@ class Tree
     return nil unless parent = find_parent(data)
 
     move = data <=> parent.data
-    node = move < 0 ? parent.left : parent.right
+    node = move.negative? ? parent.left : parent.right
     num_children = node.count_children
     if num_children.zero?
       parent.assign_child(nil, move)
     elsif num_children == 1
-      # Replace node as a child of its' parent with node's child that exitst
-      child = node.left ? node.left : node.right
-      parent.assign_child(child)
+      parent.assign_child(node.left || node.right)
     else
       replace(node)
     end
@@ -44,7 +42,7 @@ class Tree
       @root.queue([@root]) {|curr| yield(curr)}
     else
       full_list = []
-      @root.queue([@root]) {|curr| full_list << curr.data}
+      @root.queue([@root]) { |curr| full_list << curr.data }
       full_list
     end
   end
