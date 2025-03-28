@@ -27,12 +27,12 @@ class Tree
 
     move = data <=> parent.data
     node = move.negative? ? parent.left : parent.right
-    case node.count_children
-    when 0
+    num_children = node.count_children
+    if num_children.zero?
       parent.assign_child(nil, move)
-    when 1 num_children == 1
+    elsif num_children == 1
       parent.assign_child(node.left || node.right)
-    when 2
+    else
       replace(node)
     end
   end
