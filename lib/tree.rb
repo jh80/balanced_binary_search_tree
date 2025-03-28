@@ -153,7 +153,6 @@ class Tree
   end
 
   def find_parent(data)
-    return 0 if data == @root.data
     @root.traverse_parent_nodes(data)
   end
 
