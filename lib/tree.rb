@@ -159,4 +159,13 @@ class Tree
     return 0 if data == @root.data
     @root.traverse_parent_nodes(data)
   end
+
+  private
+
+  def replace(node)
+    replacement = node.next_biggest
+    new_data = replacement.data
+    delete(new_data)
+    node.data = new_data
+  end
 end
