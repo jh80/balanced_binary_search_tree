@@ -48,29 +48,29 @@ class Tree
   end
 
   def inorder(&block)
-    ordered_tree = @root.order_fam { |node| node.fam_to_array_inorder }
+    ordered_tree = @root.order_fam(&:fam_to_array_inorder)
     if block_given?
       ordered_tree.each(&block)
     else
-      ordered_tree.map {|node| node.data}
+      ordered_tree.map(&:data)
     end
   end
 
   def preorder(&block)
-    ordered_tree = @root.order_fam { |node| node.fam_to_array_preorder }
+    ordered_tree = @root.order_fam(&:fam_to_array_preorder)
     if block_given?
       ordered_tree.each(&block)
     else
-      ordered_tree.map { |node| node.data}
+      ordered_tree.map(&:data)
     end
   end
 
   def postorder(&block)
-    ordered_tree = @root.order_fam { |node| node.fam_to_array_postorder}
+    ordered_tree = @root.order_fam(&:fam_to_array_postorder)
     if block_given?
       ordered_tree.each(&block)
     else
-      ordered_tree.map { |node| node.data}
+      ordered_tree.map(&:data)
     end
   end
 
