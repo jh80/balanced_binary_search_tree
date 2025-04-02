@@ -21,11 +21,11 @@ class Node
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  def traverse_nodes(data)
+  def traverse_nodes(data, &block)
     move = data <=> @data
     return self if move.zero?
 
-    next_node(move, data) {|node, move| yield(node, move)}
+    next_node(move, data, &block)
   end
 
   def traverse_parent_nodes(data)

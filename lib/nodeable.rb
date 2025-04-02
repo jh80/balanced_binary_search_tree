@@ -3,11 +3,11 @@
 # Helps node class functions
 module Nodeable
   # Helper for traverse_nodes
-  def next_node(move, data)
+  def next_node(move, data, &block)
     child_attr = move.negative? ? @left : @right
     return yield(self, move) if child_attr.nil?
 
-    return child_attr.traverse_nodes(data) {|node, move| yield(node, move)}
+    child_attr.traverse_nodes(data, &block)
   end
 
   # Helpers for step_toward

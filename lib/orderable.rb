@@ -2,7 +2,7 @@
 
 # Orders elements for ordering tree
 module Orderable
-  def order_fam
+  def order_fam(&block)
     fam = yield(self)
     if fam.length == 1
       fam
@@ -11,7 +11,7 @@ module Orderable
         if node == self
           ordered_fams + [node]
         else
-          ordered_fams + node.order_fam { |node| yield(node) }
+          ordered_fams + node.order_fam(&block)
         end
       end
     end
