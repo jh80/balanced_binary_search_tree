@@ -37,9 +37,9 @@ class Tree
     end
   end
 
-  def level_order
+  def level_order(&block)
     if block_given?
-      @root.queue([@root]) {|curr| yield(curr)}
+      @root.queue([@root], &block)
     else
       full_list = []
       @root.queue([@root]) { |curr| full_list << curr.data }
@@ -47,28 +47,28 @@ class Tree
     end
   end
 
-  def inorder
+  def inorder(&block)
     ordered_tree = @root.order_fam { |node| node.fam_to_array_inorder }
     if block_given?
-      ordered_tree.each { |node| yield(node) }
+      ordered_tree.each(&block)
     else
       ordered_tree.map {|node| node.data}
     end
   end
 
-  def preorder
+  def preorder(&block)
     ordered_tree = @root.order_fam { |node| node.fam_to_array_preorder }
     if block_given?
-      ordered_tree.each { |node| yield(node)}
+      ordered_tree.each(&block)
     else
       ordered_tree.map { |node| node.data}
     end
   end
 
-  def postorder 
+  def postorder(&block)
     ordered_tree = @root.order_fam { |node| node.fam_to_array_postorder}
     if block_given?
-      ordered_tree.each { |node| yield(node)}
+      ordered_tree.each(&block)
     else
       ordered_tree.map { |node| node.data}
     end

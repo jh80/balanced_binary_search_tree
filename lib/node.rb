@@ -76,14 +76,14 @@ class Node
     end
   end
 
-  def queue(array)
+  def queue(array, &block)
     return if array.empty?
 
     curr = array[0]
     curr.add_children_to(array)
     yield(curr)
     array.shift
-    array[0].queue(array) {|curr| yield(curr)} unless array.empty?
+    array[0].queue(array, &block) unless array.empty?
   end
 
   def count_edges_to(node)
