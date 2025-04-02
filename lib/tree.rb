@@ -97,7 +97,7 @@ class Tree
   def level_order_i
     queue = [@root]
     full = []
-    while !queue.empty?
+    until queue.empty?
       curr = queue.shift
       curr.add_children_to(queue)
       if block_given?
@@ -106,12 +106,12 @@ class Tree
         full << curr.data
       end
     end
-    return full unless block_given?
+    full unless block_given?
   end
 
   def build_tree(array, start, stop)
     return nil if start > stop
-      
+
     middle = start + ((stop - start)/2).floor
     root = Node.new(array[middle])
     root.left = build_tree(array, start, middle - 1)
