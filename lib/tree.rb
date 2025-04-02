@@ -80,15 +80,13 @@ class Tree
 
   def height(node)
     if node.leaf?
-      return 0
+      0
     elsif node.count_children == 1
-      return node.left ? height(node.left) + 1 : height(node.right) + 1
+      node.left ? height(node.left) + 1 : height(node.right) + 1
+    elsif height(node.left) > height(node.right)
+      height(node.left) + 1
     else
-      if height(node.left) > height(node.right)
-        return height(node.left) + 1
-      else
-        return height(node.right) + 1
-      end
+      height(node.right) + 1
     end
   end
 
